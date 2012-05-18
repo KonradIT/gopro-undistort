@@ -1,14 +1,15 @@
+
 import  sys
 import  cv
 import  numpy as np
  
-if  __name__ = =  '__main__' :
+if  __name__ ==  '__main__' :
  
-    vidFile =  cv.CaptureFromFile ( 'fullvideo.avi'  )
+    vidFile =  cv.CaptureFromFile( 'GOPR3471.avi'  )
  
     nframes =  int (cv.GetCaptureProperty (vidFile, cv.CV_CAP_PROP_FRAME_COUNT))
     fps =  cv.GetCaptureProperty (vidFile, cv.CV_CAP_PROP_FPS)
-    waitPerFrameInMillisec =  int ( a / fps *  1000 / 1  )
+    waitPerFrameInMillisec =  int ( 1 / fps *  1000 / 1  )
     width =  int (cv.GetCaptureProperty (vidFile, cv.CV_CAP_PROP_FRAME_WIDTH))
     height =  int (cv.GetCaptureProperty (vidFile, cv.CV_CAP_PROP_FRAME_HEIGHT))
  
@@ -38,7 +39,7 @@ if  __name__ = =  '__main__' :
     writer =  cv.CreateVideoWriter (
         filename =  "output.avi" ,
         # = Cv.CV_FOURCC fourcc ('M', 'J', 'P', 'G'),
-        fourcc = - 1 , with # -1 is selected in Windows
+        fourcc = - 1 , #with # -1 is selected in Windows
         fps = fps,
         frame_size = (width, height),
         is_color = 1 )
@@ -50,10 +51,10 @@ if  __name__ = =  '__main__' :
     for  f in  xrange (nframes):
         frameImg =  cv.QueryFrame (vidFile)
         if  frameImg is  None :
-            print  "no frame" f, "flawed. Cancel"
+            print  "no frame", f, "flawed. Cancel"
             break
         undistimage =  cv.CloneImage (frameImg)
-        cv.Remap (frameImg undistimage, map1, map2)
+        cv.Remap (frameImg, undistimage, map1, map2)
  
         cv.ShowImage ( "Video" , undistimage)
         cv.WriteFrame (writer, undistimage)
@@ -64,7 +65,7 @@ if  __name__ = =  '__main__' :
         print  percent, "%"
  
         k =  cv.WaitKey ( 1 )
-        if  k %  0x100  = =  27 :
+        if  k %  0x100  ==  27 :
             # User has press the ESC key, then exit
             break
  
